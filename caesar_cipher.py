@@ -14,12 +14,34 @@ def cipher_key(shift):
 
 def shift_line(line, dict_key):
     new_line = ""
-    # Add code here
+    for x in line:
+        try:
+            if x.isupper() == True:
+                new_line += dict_key[x.upper()]
+            else:
+                new_line += dict_key[x.upper()].lower()
+        except KeyError:
+            new_line += x
     return new_line
 
 
 def encrypt_message(filename, dict_key):
-    # Add code here
+    old_file = open(filename,"r")
+    new_file = open("new_file.txt","a")
+
+    while True:
+        o_line = old_file.readline()
+
+        n_line = shift_line(o_line,dict_key)
+        new_file.write(n_line+"\n")
+
+        if len(o_line) == 0:
+            break
+    
+    old_file.close()
+    new_file.close()
+
+
 
 
 # Main
